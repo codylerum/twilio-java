@@ -85,10 +85,6 @@ public class Account extends InstanceResource {
 	 * @return the sid
    */
 	public String getSid() {
-		if (this.getRequestAccountSid() != null) {
-			return this.getRequestAccountSid();
-		}
-
 		return this.getProperty(ACCOUNT_SID_PROPERTY);
 	}
 
@@ -187,7 +183,7 @@ public class Account extends InstanceResource {
 	@Override
 		protected String getResourceLocation() {
 			return "/" + TwilioRestClient.DEFAULT_VERSION + "/Accounts/"
-				+ this.getRequestAccountSid() + ".json";
+				+ this.getSid() + ".json";
 		}
 
 	/*
