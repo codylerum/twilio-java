@@ -211,7 +211,7 @@ public class Account extends InstanceResource {
    */
 	public CallList getCalls(Map<String, String> filters) {
 		CallList calls = new CallList(this.getClient(), filters);
-		calls.setRequestAccountSid(this.getRequestAccountSid());
+		calls.setRequestAccountSid(this.getSid());
 
 		return calls;
 	}
@@ -223,7 +223,7 @@ public class Account extends InstanceResource {
    */
 	public Call getCall(String sid) {
 		Call call = new Call(this.getClient(), sid);
-		call.setRequestAccountSid(this.getRequestAccountSid());
+		call.setRequestAccountSid(this.getSid());
 		return call;
 	}
 
@@ -260,7 +260,7 @@ public class Account extends InstanceResource {
    */
 	public SmsList getSmsMessages(Map<String, String> filters) {
 		SmsList sms = new SmsList(this.getClient(), filters);
-		sms.setRequestAccountSid(this.getRequestAccountSid());
+		sms.setRequestAccountSid(this.getSid());
 
 		return sms;
 	}
@@ -271,7 +271,7 @@ public class Account extends InstanceResource {
    */
 	public Sms getSms(String sid) {
 		Sms sms = new Sms(this.getClient(), sid);
-		sms.setRequestAccountSid(this.getRequestAccountSid());
+		sms.setRequestAccountSid(this.getSid());
 		return sms;
 	}
 
@@ -307,7 +307,7 @@ public class Account extends InstanceResource {
    */
 	public MessageList getMessages(Map<String, String> filters) {
 		MessageList messages = new MessageList(this.getClient(), filters);
-		messages.setRequestAccountSid(this.getRequestAccountSid());
+		messages.setRequestAccountSid(this.getSid());
 
 		return messages;
 	}
@@ -328,7 +328,7 @@ public class Account extends InstanceResource {
    */
 	public Message getMessage(String sid) {
 		Message message = new Message(this.getClient(), sid);
-		message.setRequestAccountSid(this.getRequestAccountSid());
+		message.setRequestAccountSid(this.getSid());
 		return message;
 	}
 
@@ -348,7 +348,7 @@ public class Account extends InstanceResource {
    */
 	public MediaList getMedia(Map<String, String> filters) {
 		MediaList mediaList = new MediaList(this.getClient(), filters);
-		mediaList.setRequestAccountSid(this.getRequestAccountSid());
+		mediaList.setRequestAccountSid(this.getSid());
 
 		return mediaList;
 	}
@@ -361,7 +361,7 @@ public class Account extends InstanceResource {
    */
 	public Media getMedia(String sid) {
 		Media media = new Media(this.getClient(), sid);
-		media.setRequestAccountSid(this.getRequestAccountSid());
+		media.setRequestAccountSid(this.getSid());
 		return media;
 	}
 
@@ -386,7 +386,7 @@ public class Account extends InstanceResource {
    */
 	public ApplicationList getApplications(Map<String, String> filters) {
 		ApplicationList list = new ApplicationList(this.getClient(), filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -396,7 +396,7 @@ public class Account extends InstanceResource {
    */
 	public Application getApplication(String sid) {
 		Application app = new Application(this.getClient(), sid);
-		app.setRequestAccountSid(this.getRequestAccountSid());
+		app.setRequestAccountSid(this.getSid());
 		return app;
 	}
 
@@ -438,7 +438,7 @@ public class Account extends InstanceResource {
 			Map<String, String> filters) {
 		AvailablePhoneNumberList list = new AvailablePhoneNumberList(
 				this.getClient(), filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 			}
 
@@ -462,7 +462,7 @@ public class Account extends InstanceResource {
 			Map<String, String> filters, String isoCountry, String type) {
 		AvailablePhoneNumberList list = new AvailablePhoneNumberList(
 				this.getClient(), filters, isoCountry, type);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 
 		return list;
 			}
@@ -489,7 +489,7 @@ public class Account extends InstanceResource {
    */
 	public ConferenceList getConferences(Map<String, String> filters) {
 		ConferenceList list = new ConferenceList(this.getClient(), filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -499,7 +499,7 @@ public class Account extends InstanceResource {
    */
 	public Conference getConference(String sid) {
 		Conference conf = new Conference(this.getClient(), sid);
-		conf.setRequestAccountSid(this.getRequestAccountSid());
+		conf.setRequestAccountSid(this.getSid());
 		return conf;
 	}
 
@@ -512,7 +512,7 @@ public class Account extends InstanceResource {
    */
 	public QueueList getQueues() {
 		QueueList list = new QueueList(this.getClient(), filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -524,7 +524,7 @@ public class Account extends InstanceResource {
    */
 	public Queue getQueue(String sid) {
 		Queue queue = new Queue(this.getClient(), sid);
-		queue.setRequestAccountSid(this.getRequestAccountSid());
+		queue.setRequestAccountSid(this.getSid());
 		return queue;
 	}
 
@@ -559,7 +559,7 @@ public class Account extends InstanceResource {
 			Map<String, String> filters) {
 		IncomingPhoneNumberList list = new IncomingPhoneNumberList(
 				this.getClient(), filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 			}
 
@@ -569,7 +569,7 @@ public class Account extends InstanceResource {
    */
 	public IncomingPhoneNumber getIncomingPhoneNumber(String sid) {
 		IncomingPhoneNumber pn = new IncomingPhoneNumber(this.getClient(), sid);
-		pn.setRequestAccountSid(this.getRequestAccountSid());
+		pn.setRequestAccountSid(this.getSid());
 		return pn;
 	}
 
@@ -602,7 +602,7 @@ public class Account extends InstanceResource {
    */
 	public ShortCodeList getShortCodes(Map<String, String> filters) {
 		ShortCodeList list = new ShortCodeList(this.getClient(), filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -612,7 +612,7 @@ public class Account extends InstanceResource {
    */
 	public ShortCode getShortCode(String sid) {
 		ShortCode sc = new ShortCode(this.getClient(), sid);
-		sc.setRequestAccountSid(this.getRequestAccountSid());
+		sc.setRequestAccountSid(this.getSid());
 		return sc;
 	}
 
@@ -634,7 +634,7 @@ public class Account extends InstanceResource {
    */
 	public NotificationList getNotifications(Map<String, String> filters) {
 		NotificationList list = new NotificationList(this.getClient(), filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -644,7 +644,7 @@ public class Account extends InstanceResource {
    */
 	public Notification getNotification(String sid) {
 		Notification n = new Notification(this.getClient(), sid);
-		n.setRequestAccountSid(this.getRequestAccountSid());
+		n.setRequestAccountSid(this.getSid());
 		return n;
 	}
 
@@ -672,7 +672,7 @@ public class Account extends InstanceResource {
 	public OutgoingCallerIdList getOutgoingCallerIds(Map<String, String> filters) {
 		OutgoingCallerIdList list = new OutgoingCallerIdList(this.getClient(),
 				filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -682,7 +682,7 @@ public class Account extends InstanceResource {
    */
 	public OutgoingCallerId getOutgoingCallerId(String sid) {
 		OutgoingCallerId number = new OutgoingCallerId(this.getClient(), sid);
-		number.setRequestAccountSid(this.getRequestAccountSid());
+		number.setRequestAccountSid(this.getSid());
 		return number;
 	}
 
@@ -721,7 +721,7 @@ public class Account extends InstanceResource {
    */
 	public RecordingList getRecordings(Map<String, String> filters) {
 		RecordingList list = new RecordingList(this.getClient(), filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -731,7 +731,7 @@ public class Account extends InstanceResource {
    */
 	public Recording getRecording(String sid) {
 		Recording r = new Recording(this.getClient(), sid);
-		r.setRequestAccountSid(this.getRequestAccountSid());
+		r.setRequestAccountSid(this.getSid());
 		return r;
 	}
 
@@ -758,7 +758,7 @@ public class Account extends InstanceResource {
 	public TranscriptionList getTranscriptions(Map<String, String> filters) {
 		TranscriptionList list = new TranscriptionList(this.getClient(),
 				filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -768,7 +768,7 @@ public class Account extends InstanceResource {
    */
 	public Transcription getTranscription(String sid) {
 		Transcription tr = new Transcription(this.getClient(), sid);
-		tr.setRequestAccountSid(this.getRequestAccountSid());
+		tr.setRequestAccountSid(this.getSid());
 		return tr;
 	}
 
@@ -784,7 +784,7 @@ public class Account extends InstanceResource {
 	public UsageRecordList getUsageRecords(Map<String, String> filters) {
 		UsageRecordList list = new UsageRecordList(this.getClient(),
 				filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -804,7 +804,7 @@ public class Account extends InstanceResource {
    */
 	public UsageTrigger getUsageTrigger(String sid) {
 		UsageTrigger trigger = new UsageTrigger(this.getClient(), sid);
-		trigger.setRequestAccountSid(this.getRequestAccountSid());
+		trigger.setRequestAccountSid(this.getSid());
 		return trigger;
 	}
 
@@ -829,7 +829,7 @@ public class Account extends InstanceResource {
 	public UsageTriggerList getUsageTriggers(Map<String, String> filters) {
 		UsageTriggerList list = new UsageTriggerList(this.getClient(),
 				filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -867,7 +867,7 @@ public class Account extends InstanceResource {
 	public ConnectAppList getConnectApps(Map<String, String> filters) {
 		ConnectAppList list = new ConnectAppList(this.getClient(),
 				filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -878,7 +878,7 @@ public class Account extends InstanceResource {
    */
 	public ConnectApp getConnectApp(String sid) {
 		ConnectApp cn = new ConnectApp(this.getClient(), sid);
-		cn.setRequestAccountSid(this.getRequestAccountSid());
+		cn.setRequestAccountSid(this.getSid());
 		return cn;
 	}
 
@@ -905,7 +905,7 @@ public class Account extends InstanceResource {
 	public AuthorizedConnectAppList getAuthorizedConnectApps(Map<String, String> filters) {
 		AuthorizedConnectAppList list = new AuthorizedConnectAppList(this.getClient(),
 				filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -916,7 +916,7 @@ public class Account extends InstanceResource {
    */
 	public AuthorizedConnectApp getAuthorizedConnectApp(String sid) {
 		AuthorizedConnectApp cn = new AuthorizedConnectApp(this.getClient(), sid);
-		cn.setRequestAccountSid(this.getRequestAccountSid());
+		cn.setRequestAccountSid(this.getSid());
 		return cn;
 	}
 
@@ -943,7 +943,7 @@ public class Account extends InstanceResource {
 	public DomainList getDomains(Map<String, String> filters) {
 		DomainList list = new DomainList(this.getClient(),
 				filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -954,7 +954,7 @@ public class Account extends InstanceResource {
 	 */
 	public Domain getDomain(String sid) {
 		Domain domain = new Domain(this.getClient(), sid);
-		domain.setRequestAccountSid(this.getRequestAccountSid());
+		domain.setRequestAccountSid(this.getSid());
 		return domain;
 	}
 
@@ -989,7 +989,7 @@ public class Account extends InstanceResource {
 	public IpAccessControlListList getIpAccessControlLists(Map<String, String> filters) {
 		IpAccessControlListList list = new IpAccessControlListList(this.getClient(),
 				filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -1000,7 +1000,7 @@ public class Account extends InstanceResource {
 	 */
 	public IpAccessControlList getIpAccessControlList(String sid) {
 		IpAccessControlList ipAccessControlList = new IpAccessControlList(this.getClient(), sid);
-		ipAccessControlList.setRequestAccountSid(this.getRequestAccountSid());
+		ipAccessControlList.setRequestAccountSid(this.getSid());
 		return ipAccessControlList;
 	}
 
@@ -1035,7 +1035,7 @@ public class Account extends InstanceResource {
 	public CredentialListList getCredentialLists(Map<String, String> filters) {
 		CredentialListList list = new CredentialListList(this.getClient(),
 				filters);
-		list.setRequestAccountSid(this.getRequestAccountSid());
+		list.setRequestAccountSid(this.getSid());
 		return list;
 	}
 
@@ -1046,7 +1046,7 @@ public class Account extends InstanceResource {
 	 */
 	public CredentialListInstance getCredentialList(String sid) {
 		CredentialListInstance credentialList = new CredentialListInstance(this.getClient(), sid);
-		credentialList.setRequestAccountSid(this.getRequestAccountSid());
+		credentialList.setRequestAccountSid(this.getSid());
 		return credentialList;
 	}
 
@@ -1066,7 +1066,7 @@ public class Account extends InstanceResource {
    */
 	public Sandbox getSandbox() {
 		Sandbox sb = new Sandbox(this.getClient());
-		sb.setRequestAccountSid(this.getRequestAccountSid());
+		sb.setRequestAccountSid(this.getSid());
 		return sb;
 	}
 
