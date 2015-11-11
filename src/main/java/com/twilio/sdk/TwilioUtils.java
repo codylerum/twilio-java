@@ -1,6 +1,5 @@
 package com.twilio.sdk;
 
-
 /*
 Copyright (c) 2013 Twilio, Inc.
 
@@ -28,96 +27,133 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class TwilioUtils {
 
+    public static final ObjectMapper JSON_OBJECT_MAPPER = new ObjectMapper();
+
     protected String authToken;
-    
-    public TwilioUtils(String authToken){
+
+    public TwilioUtils(String authToken) {
         this.authToken = authToken;
     }
-    
+
     @Deprecated
-    public TwilioUtils(String authToken, String accountSid){
-    	this.authToken = authToken;
+    public TwilioUtils(String authToken, String accountSid) {
+        this.authToken = authToken;
     }
 
-    public boolean validateRequest(String expectedSignature, String url, Map<String,String> params) {
+    public boolean validateRequest(String expectedSignature, String url, Map<String, String> params) {
         String signature = null;
 
         signature = getValidationSignature(url, params);
         return secureCompare(signature, expectedSignature);
     }
-    
-    public String getValidationSignature(String url, Map<String,String> params) {
-    	SecretKeySpec signingKey = new SecretKeySpec(this.authToken.getBytes(), "HmacSHA1");
-   	
-    	try {
-	    	//initialize the hash algortihm
-	        Mac mac = Mac.getInstance("HmacSHA1");
-	        mac.init(signingKey);
-	
-	        //sort the params alphabetically, and append the key and value of each to the url
-	        StringBuffer data = new StringBuffer(url);
-	        if (params != null) {
-	            List<String> sortedKeys = new ArrayList<String>( params.keySet());
-	            Collections.sort(sortedKeys);
-	
-	            for (String s: sortedKeys) {
-	                data.append(s);
-	                String v = "";
-	                if (params.get(s) != null) {
-	                    v = params.get(s);
-	                }
-	                data.append(v);
-	            }
-	        }
-	
-	        //compute the hmac on input data bytes
-	        byte[] rawHmac = mac.doFinal(data.toString().getBytes("UTF-8"));
-	
-	        //base64-encode the hmac
-	        String signature = new String(Base64.encodeBase64(rawHmac));
-	
-	        return signature; 
-        } catch (NoSuchAlgorithmException e) {
+
+    public String getValidationSignature(String url, Map<String, String> params) {
+        SecretKeySpec signingKey = new SecretKeySpec(this.authToken.getBytes(), "HmacSHA1");
+
+        try {
+            // initialize the hash algortihm
+            Mac mac = Mac.getInstance("HmacSHA1");
+            mac.init(signingKey);
+
+            // sort the params alphabetically, and append the key and value of each to the url
+            StringBuffer data = new StringBuffer(url);
+            if (params != null) {
+                List<String> sortedKeys = new ArrayList<String>(params.keySet());
+                Collections.sort(sortedKeys);
+
+                for (String s : sortedKeys) {
+                    data.append(s);
+                    String v = "";
+                    if (params.get(s) != null) {
+                        v = params.get(s);
+                    }
+                    data.append(v);
+                }
+            }
+
+            // compute the hmac on input data bytes
+            byte[] rawHmac = mac.doFinal(data.toString().getBytes("UTF-8"));
+
+            // base64-encode the hmac
+            String signature = new String(Base64.encodeBase64(rawHmac));
+
+            return signature;
+        }
+        catch (NoSuchAlgorithmException e) {
             return null;
-        } catch (InvalidKeyException e) {
+        }
+        catch (InvalidKeyException e) {
             return null;
-        } catch (UnsupportedEncodingException e) {
+        }
+        catch (UnsupportedEncodingException e) {
             return null;
         }
     }
 
     /**
-     * Securely compare two strings, using constant time to avoid timing
-     * attacks.  We can't use MessageDigest.isEqual because it didn't do
-     * constant-time compares until JDK6u17 - see:
-     * http://codahale.com/a-lesson-in-timing-attacks/
+     * Securely compare two strings, using constant time to avoid timing attacks. We can't use MessageDigest.isEqual because it
+     * didn't do constant-time compares until JDK6u17 - see: http://codahale.com/a-lesson-in-timing-attacks/
      */
     static boolean secureCompare(String a, String b) {
-      if (a == null || b == null) {
-        return false;
-      }
-      int n = a.length();
-      if (n != b.length()) {
-        return false;
-      }
-      int mismatch = 0;
-      for (int i = 0; i < n; ++i) {
-        char chA = a.charAt(i);
-        char chB = b.charAt(i);
-        mismatch |= chA ^ chB;
-      }
-      return mismatch == 0;
+        if (a == null || b == null) {
+            return false;
+        }
+        int n = a.length();
+        if (n != b.length()) {
+            return false;
+        }
+        int mismatch = 0;
+        for (int i = 0; i < n; ++i) {
+            char chA = a.charAt(i);
+            char chB = b.charAt(i);
+            mismatch |= chA ^ chB;
+        }
+        return mismatch == 0;
+    }
+    
+    public static String asJsonString(Object value){
+      try {
+        return JSON_OBJECT_MAPPER.writeValueAsString(value);
+        }
+        catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+	public static Map<String, Object> jsonAsMap(String value) {
+        try {
+            return value !=null ? JSON_OBJECT_MAPPER.readValue(value, HashMap.class) : new HashMap<String, Object>();
+        }
+        catch (JsonParseException e) {
+            throw new RuntimeException(e);
+        }
+        catch (JsonMappingException e) {
+            throw new RuntimeException(e);
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
